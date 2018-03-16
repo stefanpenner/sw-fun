@@ -52,7 +52,9 @@ describe('foo', function() {
       const api = session.createAPIClient("localhost", browser.remoteDebuggingPort);
       const tab = await api.newTab("about:blank");
       const client = await session.openDebuggingProtocol(tab.webSocketDebuggerUrl);
-      client.send("ServiceWorker.enable", {});
+
+      await client.send("ServiceWorker.enable", {});
+
       client.on("ServiceWorker.workerErrorReported", ({ errorMessage }) => console.log(errorMessage))
       client.on("ServiceWorker.workerVersionUpdated", async ({versions}) => {
         for (let version of versions) {
