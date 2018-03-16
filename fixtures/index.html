@@ -1,0 +1,16 @@
+<script>
+  navigator.serviceWorker.register('/sw.js');
+
+async function sendPostMessage() {
+  console.log('click');
+  await navigator.serviceWorker.ready;
+  navigator.serviceWorker.controller.postMessage({});
+}
+
+navigator.serviceWorker.ready.then(() => {
+  button.disabled = false;
+});
+
+</script>
+<h1>Failed to update a ServiceWorker Error</h1>
+<button id="button" disabled onclick="sendPostMessage()">postMessage Worker</button>
